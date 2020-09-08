@@ -13,6 +13,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ public class ItemController {
 	private Environment env;
 	
 	@Autowired
-	@Qualifier("serviceRestTemplate")
+	@Qualifier("serviceFeign")
 	private ItemService itemService;
 	
 	@Value("${configuracion.texto}")
@@ -93,7 +94,7 @@ public class ItemController {
 		return itemService.update(producto,id);
 	}
 	
-	@PutMapping("/eliminar/{id}")
+	@DeleteMapping("/eliminar/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void eliminar(@PathVariable Long id) {
 		itemService.delete(id);
