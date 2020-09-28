@@ -28,6 +28,7 @@ public class Usuario implements Serializable {
 
 	@Column(length = 60)
 	private String password;
+
 	private Boolean enabled;
 	private String nombre;
 	private String apellido;
@@ -36,8 +37,9 @@ public class Usuario implements Serializable {
 	private String email;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"),
-	uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id", "role_id"})})
+	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), 
+	inverseJoinColumns = @JoinColumn(name = "role_id"), 
+	uniqueConstraints = {@UniqueConstraint(columnNames = { "usuario_id", "role_id" }) })
 	private List<Role> roles;
 
 	public List<Role> getRoles() {
